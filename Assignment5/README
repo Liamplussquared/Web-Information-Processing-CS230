@@ -1,0 +1,8 @@
+The tasks for this assignment were to create a SPA which implements the following:
+ 1) implements an online form to obtain user interaction data suitable for CRUD activity
+ 2) consumes a RESTful API using jQuery for all API requests and
+ 3) provide visualisation of client-server interaction, assuming data exhanged is in JSON format.
+ 
+ A server app was to be created (in PHP) that implemented a RESTful API interface and which services the CRUD requests from the SPA.
+ 
+ 
