@@ -1,0 +1,2 @@
+Task was to create an HTML/CSS/JS application similar to in assignment 1. Additional requirements were to allow for entry of new columns (scores) and rows (students) to the table.
+Additional tasks were to allow for the deletion of rows/columns, storing of table data into a cookie and retrieval of previous table states (via cookie).
