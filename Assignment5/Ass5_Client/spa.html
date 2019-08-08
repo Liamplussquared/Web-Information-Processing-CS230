@@ -1,0 +1,245 @@
+<!DOCTYPE html> 
+<html>
+<head>
+<style>
+	table {
+		margin: 1em auto;
+	}
+
+	table, th, td {
+		border: 1px solid black;
+	}
+
+	.b {
+		text-align: center;
+	}
+	
+	button {
+		background-color: #4CAF50;
+		border: 1px solid green;
+		color: white;
+		padding: 12px 30px;
+		text-align: center;
+		font-size: 15px;
+	}
+	
+	.display {
+		text-align: center;
+	}
+
+	input[type=text] {
+		width: 40%;
+		padding: 8px 20px;
+		margin: 8px 0;
+		box-sizing: border-box;
+		background-color: #00ccff;
+		border: 2px solid blue;
+	}
+	
+	input[type = submit] {
+		width: 20%;
+		border-radius: 15px;
+		border: none;
+		background-color: lightgreen;
+	}
+	
+	h3 {
+		
+		text-align: center;
+		font-family: "sans-serif";
+		color: #36688D;
+	}
+	
+	body {
+		background-color: #ffffff;
+	}
+	
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+	//insert NEW row
+	$('#insert').submit(function() {
+		var Data = $(this).serialize(); //name, url and desc
+		$.ajax( {
+			type: 'POST',
+			url: '../Ass5_Service/tempPhp.php',
+			data: Data,
+			success: function (data) {
+				alert("Row entered successfully!");
+				document.getElementById("showAll").click();
+				console.log(data);
+			}
+		})
+		
+		.fail(function() {
+			alert("failed!"); 
+		});
+		
+		return false;
+	  });
+  
+  //retrieve ALL rows
+  $('#showAll').click(function () {
+	$.ajax( {
+		type: 'GET',
+		url: '../Ass5_Service/tempPhp.php',
+		success: function (data) {
+			var disp = document.getElementById('display');
+			disp.innerHTML = data;
+		}
+	})
+	
+	return false;
+  });
+  
+  
+  //delete a row
+  $('#delete').submit(function () {
+	var Data = $(this).serialize(); //id 
+	$.ajax ( {
+		type: 'DELETE',
+		url: '../Ass5_Service/tempPhp.php',
+		data: Data,
+		success: function (data) {
+			alert("Row deleted successfully!");
+			document.getElementById("showAll").click();
+			console.log(data);
+		}
+	});
+	return false;
+  });
+  
+	//update name by giving id and new name...
+	$('#uname').submit(function() {
+		var Data = $(this).serialize(); //name, url and desc
+		console.log(Data);
+		$.ajax( {
+			type: 'POST',
+			url: '../Ass5_Service/tempPhp.php',
+			data: Data,
+			success: function (data) {
+				alert("Row updated successfully!");
+				document.getElementById("showAll").click();
+				console.log(data);
+			}
+		})
+		
+		.fail(function() {
+			alert("failed!"); 
+		});
+		
+		return false;
+	  });
+	//update url by giving id and new url
+	
+	$('#uURL').submit(function() {
+		var Data = $(this).serialize(); //id, url
+		console.log(Data);
+		$.ajax( {
+			type: 'POST',
+			url: '../Ass5_Service/tempPhp.php',
+			data: Data,
+			success: function (data) {
+				alert("Row updated successfully!");
+				document.getElementById("showAll").click();
+				console.log(data);
+			}
+		})
+		
+		.fail(function() {
+			alert("failed!"); 
+		});
+		
+		return false;
+	  });
+	  
+	$('#uDesc').submit(function() {
+		var Data = $(this).serialize(); //id, desc
+		console.log(Data);
+		$.ajax( {
+			type: 'POST',
+			url: '../Ass5_Service/tempPhp.php',
+			data: Data,
+			success: function (data) {
+				alert("Row updated successfully!");
+				document.getElementById("showAll").click();
+				console.log(data);
+			}
+		})
+		
+		.fail(function() {
+			alert("failed!"); 
+		});
+		
+		return false;
+	  });
+	  
+	  
+	  //retrieve by id
+	  $('rID').submit(function() {
+		document.getElementById("showAll").click();
+	  });
+  
+  
+});
+</script>
+
+
+
+</head>
+
+<body>
+<div style = "text-align: center">
+	<h3> Insert row into table! </h3>
+	<form id = "insert"> 
+		Name <br> <input type="text" name = "Name" id = "name1"> <br>
+		URL <br> <input type="text" name = "URL" id = "url1"> <br>
+		Description <br> <input type="text" name = "Description" id = "desc1"> <br>
+	<input type = "submit">
+	</form>
+
+	<br> 
+
+	<h3> Delete row by giving id! </h3>
+	<form id = "delete">
+		ID <br> <input type="text" name = "ID"> <br>
+	<input type = "submit" value = "Delete">
+	</form>
+
+
+	<h3> Update name by giving id! </h3>
+	<form id = "uname">
+		ID <br> <input type="text" name = "ID"> <br>
+		Name <br> <input type="text" name = "Name"> <br>
+	<input type = "submit" value = "UpdateName">
+	</form>
+	
+	<h3> Update URL by giving id! </h3>
+	<form id = "uURL">
+		ID <br> <input type="text" name = "ID"> <br>
+		URL <br> <input type="text" name = "URL"> <br>
+	<input type = "submit" value = "UpdateURL">
+	</form>
+	
+	<h3> Update Description by giving id! </h3>
+	<form id = "uDesc">
+		ID <br> <input type="text" name = "ID"> <br>
+		Description <br> <input type="text" name = "Description"> <br>
+	<input type = "submit" value = "UpdateDescription">
+	</form>
+
+</div>
+
+<br>
+<div class = "b">
+<button id = "showAll">
+		Click to display all entries in table!
+</button>
+</div>
+<br>
+<div id = "display" class = "display">
+</div>
+
+</body>
+</html>
