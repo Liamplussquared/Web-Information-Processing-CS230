@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<script>
+	function showDrawing (image,id) {
+		var add = "gifs\/" + id + "\.gif";
+		image.src = add;
+	}
+	
+	function defaultImage(image,id) {
+		var add = "images\/" + id + "\.png";
+		image.src = add;
+	}
+	
+	function playAudio(id) {
+		var add = "audio\/" + id + "\.mp3";
+		var audio = new Audio(add);
+		audio.play();
+	}
+	
+	function hideTable() {
+		var x = document.getElementById("hidden");
+		if (x.style.display === "none") {
+			x.style.display = "table";
+		 } 
+		 else {
+			x.style.display = "none";
+		 }	
+	}
+	
+
+	//NOTE: structure for quiz came from https://simplestepscode.com/javascript-quiz-tutorial/
+	function startQuiz(whichQuiz) {
+		//only want to allow user to start one quiz at a time... 
+		//going to "hide" other two quizes when user selects one
+		//can do this by simply setting display to none
+		
+		//set quiz variable 
+		if (whichQuiz == 1) {
+			//first hide other two quizzes
+			var q2 = document.getElementById("button2");
+			var q3 = document.getElementById("button3");
+			q2.style.display = "none";
+			q3.style.display = "none";
+			//I'm actually surprised how well that worked ^^ 
+			var myQuestions = [
+				{
+					question:"Q1: What is the romaji of this symbol? <br> <img width = 25px; height = 25px; src = 'http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/01_a.jpg'>",
+					answers: {
+						a: 'a',
+						b: 'hu',
+						c: 'ha',
+						d: 'he'
+					},
+					correctAnswer: 'a'
+				},
+				{
+					question: "Q2: Which symbol corresponds to 'ku'?",
+					answers: {
+						a: '<img width = 25px; height = 25px; src = "http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/09_ke.jpg">',
+						b: '<img width = 25px; height = 25px src = "http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/10_ko.jpg">',
+						c: '<img  width = 25px; height = 25px src = "http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/08_ku.jpg">',
+						d: '<img  width = 25px; height = 25px src = "http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/11_sa.jpg">'
+					},
+					correctAnswer: 'c'
+				}, 
+				{
+					question: "Q3: What is the romaji of this symbol?  <br> <img width = 25px; height = 25px; src = 'http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/29_he.jpg'>",
+					answers: {
+						a: 'hu',
+						b: 'ta',
+						c: 'e',
+						d: 'he'
+					},
+					correctAnswer: 'd'
+				},
+				{
+					question: "Q4: Which symbol corresponds to 'o'?",
+					answers: {
+						a: "<img width = 25px; height = 25px; src = 'http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/02_i.jpg'>",
+						b: "<img width = 25px; height = 25px; src = 'http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/03_u.jpg'>",
+						c: "<img width = 25px; height = 25px; src = 'http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/04_e.jpg'>",
+						d: "<img width = 25px; height = 25px; src = 'http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/05_o.jpg'>"
+					},
+					correctAnswer: 'd'
+				},
+				{
+					question: "Q5: What is the romaji of this symbol?  <br> <img width = 25px; height = 25px; src = 'http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/03_u.jpg'>",
+					answers: {
+						a: 'i',
+						b: 'ke',
+						c: 'u',
+						d: 'ma'
+					},
+					correctAnswer: 'c'
+				},
+				{
+					question: "Q6: Which symbol corresponds to 'hi'?",
+					answers: {
+						a: "<img width = 25px; height = 25px; src = 'http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/17_chi.jpg'>",
+						b: "<img width = 25px; height = 25px; src = 'http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/27_hi.jpg'>",
+						c: "<img width = 25px; height = 25px; src = 'http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/01_a.jpg'>",
+						d: "<img width = 25px; height = 25px; src = 'http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/36_ya.jpg'>"
+					},
+					correctAnswer: 'b'
+				},
+				{
+					question: "Q7: What is the romaji of this symbol?  <br> <img width = 25px; height = 25px; src = 'http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/10_ko.jpg'>",
+					answers: {
+						a: "ko",
+						b: "ki",
+						c: "ku",
+						d: "ke"
+					},
+					correctAnswer: 'a'
+				},
+				{
+					question: "Q8: Which symbol corresponds to 'hu'?",
+					answers: {
+						a: "<img width = 25px; height = 25px; src = 'http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/46_n.jpg'>",
+						b: "<img width = 25px; height = 25px; src = 'http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/45_wo.jpg'>",
+						c: "<img width = 25px; height = 25px; src = 'http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/44_wa.jpg'>",
+						d: "<img width = 25px; height = 25px; src = 'http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/28_hu.jpg'>"
+					},
+					correctAnswer: 'd'
+				},
+				{
+					question: "Q9: What is the romaji of this symbol?  <br> <img width = 25px; height = 25px; src = 'http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/07_ki.jpg'>",
+					answers: {
+						a: 'ki',
+						b: 'to',
+						c: 'mu',
+						d: 'e'
+					},
+					correctAnswer: 'a'
+				},
+				{
+					question: "Q10: Which symbol corresponds to 'ka'?",
+					answers: {
+						a: "<img width = 25px; height = 25px; src = 'http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/11_sa.jpg'>",
+						b: "<img width = 25px; height = 25px; src = 'http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/31_ma.jpg'>",
+						c: "<img width = 25px; height = 25px; src = 'http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/26_ha.jpg'>",
+						d: "<img width = 25px; height = 25px; src = 'http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/06_ka.jpg'>"
+					},
+					correctAnswer: 'd'
+				}			
+			]; 
+		}
+		
+		else if (whichQuiz == 2) {
+			//hide other two quizzes
+			var q1 = document.getElementById("button1");
+			var q3 = document.getElementById("button3");
+			q1.style.display = "none";
+			q3.style.display = "none";
+			var myQuestions = [
+				{
+					question:"Q1: What is the romaji of this symbol? <br> <img width = 25px; height = 25px; src = 'http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/31_ma.jpg'>",
+					answers: {
+						a: 'mi',
+						b: 'ma',
+						c: 'ra',
+						d: 'ne'
+					},
+					correctAnswer: 'b'
+				},
+				{
+					question: "Q2: Which symbol corresponds to 'ru'?",
+					answers: {
+						a: '<img width = 25px; height = 25px; src = "http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/09_ke.jpg">',
+						b: '<img width = 25px; height = 25px src = "http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/10_ko.jpg">',
+						c: '<img  width = 25px; height = 25px src = "http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/41_ru.jpg">',
+						d: '<img  width = 25px; height = 25px src = "http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/11_sa.jpg">'
+					},
+					correctAnswer: 'c'
+				}, 
+				{
+					question: "Q3: What is the romaji of this symbol?  <br> <img width = 25px; height = 25px; src = 'http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/33_mu.jpg'>",
+					answers: {
+						a: 'mu',
+						b: 'ra',
+						c: 'ne',
+						d: 'me'
+					},
+					correctAnswer: 'a'
+				},
+				{
+					question: "Q4: Which symbol corresponds to 'ro'?",
+					answers: {
+						a: "<img width = 25px; height = 25px; src = 'http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/30_ho.jpg'>",
+						b: "<img width = 25px; height = 25px; src = 'http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/33_mu.jpg'>",
+						c: "<img width = 25px; height = 25px; src = 'http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/40_ri.jpg'>",
+						d: "<img width = 25px; height = 25px; src = 'http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/43_ro.jpg'>"
+					},
+					correctAnswer: 'd'
+				},
+				{
+					question: "Q5: What is the romaji of this symbol?  <br> <img width = 25px; height = 25px; src = 'http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/34_me.jpg'>",
+					answers: {
+						a: 'ri',
+						b: 'ra',
+						c: 'me',
+						d: 'ma'
+					},
+					correctAnswer: 'c'
+				},
+				{
+					question: "Q6: Which symbol corresponds to 'ri'?",
+					answers: {
+						a: "<img width = 25px; height = 25px; src = 'http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/40_ri.jpg'>",
+						b: "<img width = 25px; height = 25px; src = 'http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/32_mi.jpg'>",
+						c: "<img width = 25px; height = 25px; src = 'http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/39_ra.jpg'>",
+						d: "<img width = 25px; height = 25px; src = 'http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/21_na.jpg'>"
+					},
+					correctAnswer: 'a'
+				},
+				{
+					question: "Q7: What is the romaji of this symbol?  <br> <img width = 25px; height = 25px; src = 'http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/21_na.jpg'>",
+					answers: {
+						a: "mo",
+						b: "ni",
+						c: "na",
+						d: "re"
+					},
+					correctAnswer: 'c'
+				},
+				{
+					question: "Q8: Which symbol corresponds to 'nu'?",
+					answers: {
+						a: "<img width = 25px; height = 25px; src = 'http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/23_nu.jpg'>",
+						b: "<img width = 25px; height = 25px; src = 'http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/45_wo.jpg'>",
+						c: "<img width = 25px; height = 25px; src = 'http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/37_yu.jpg'>",
+						d: "<img width = 25px; height = 25px; src = 'http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/28_hu.jpg'>"
+					},
+					correctAnswer: 'a'
+				},
+				{
+					question: "Q9: What is the romaji of this symbol?  <br> <img width = 25px; height = 25px; src = 'http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/25_no.jpg'>",
+					answers: {
+						a: 'ni',
+						b: 'no',
+						c: 'mu',
+						d: 're'
+					},
+					correctAnswer: 'b'
+				},
+				{
+					question: "Q10: Which symbol corresponds to 'ne'?",
+					answers: {
+						a: "<img width = 25px; height = 25px; src = 'http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/34_me.jpg'>",
+						b: "<img width = 25px; height = 25px; src = 'http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/24_ne.jpg'>",
+						c: "<img width = 25px; height = 25px; src = 'http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/26_ha.jpg'>",
+						d: "<img width = 25px; height = 25px; src = 'http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/36_ya.jpg'>"
+					},
+					correctAnswer: 'b'
+				}			
+			];
+		}
+		
+		else if (whichQuiz == 3) {
+			//again, going to hide other two quzizes
+			var q1 = document.getElementById("button1");
+			var q2 = document.getElementById("button2");
+			q1.style.display = "none";
+			q2.style.display = "none";
+			var myQuestions = [
+				{
+					question:"Q1: What is the romaji of this symbol? <br> <img width = 25px; height = 25px; src = 'http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/11_sa.jpg'>",
+					answers: {
+						a: 'sa',
+						b: 'hu',
+						c: 'ha',
+						d: 'he'
+					},
+					correctAnswer: 'a'
+				},
+				{
+					question: "Q2: Which symbol corresponds to 'ta'?",
+					answers: {
+						a: '<img width = 25px; height = 25px; src = "http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/09_ke.jpg">',
+						b: '<img width = 25px; height = 25px src = "http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/10_ko.jpg">',
+						c: '<img  width = 25px; height = 25px src = "http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/16_ta.jpg">',
+						d: '<img  width = 25px; height = 25px src = "http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/11_sa.jpg">'
+					},
+					correctAnswer: 'c'
+				}, 
+				{
+					question: "Q3: What is the romaji of this symbol?  <br> <img width = 25px; height = 25px; src = 'http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/12_shi.jpg'>",
+					answers: {
+						a: 'hu',
+						b: 'ta',
+						c: 'e',
+						d: 'si'
+					},
+					correctAnswer: 'd'
+				},
+				{
+					question: "Q4: Which symbol corresponds to 'to'?",
+					answers: {
+						a: "<img width = 25px; height = 25px; src = 'http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/02_i.jpg'>",
+						b: "<img width = 25px; height = 25px; src = 'http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/03_u.jpg'>",
+						c: "<img width = 25px; height = 25px; src = 'http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/04_e.jpg'>",
+						d: "<img width = 25px; height = 25px; src = 'http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/20_to.jpg'>"
+					},
+					correctAnswer: 'd'
+				},
+				{
+					question: "Q5: What is the romaji of this symbol?  <br> <img width = 25px; height = 25px; src = 'http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/13_su.jpg'>",
+					answers: {
+						a: 'i',
+						b: 'ke',
+						c: 'su',
+						d: 'ma'
+					},
+					correctAnswer: 'c'
+				},
+				{
+					question: "Q6: Which symbol corresponds to 'ti'?",
+					answers: {
+						a: "<img width = 25px; height = 25px; src = 'http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/17_chi.jpg'>",
+						b: "<img width = 25px; height = 25px; src = 'http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/17_chi.jpg'>",
+						c: "<img width = 25px; height = 25px; src = 'http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/01_a.jpg'>",
+						d: "<img width = 25px; height = 25px; src = 'http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/36_ya.jpg'>"
+					},
+					correctAnswer: 'b'
+				},
+				{
+					question: "Q7: What is the romaji of this symbol?  <br> <img width = 25px; height = 25px; src = 'http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/14_se.jpg'>",
+					answers: {
+						a: "se",
+						b: "ki",
+						c: "ku",
+						d: "ke"
+					},
+					correctAnswer: 'a'
+				},
+				{
+					question: "Q8: Which symbol corresponds to 'n'?",
+					answers: {
+						a: "<img width = 25px; height = 25px; src = 'http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/46_n.jpg'>",
+						b: "<img width = 25px; height = 25px; src = 'http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/45_wo.jpg'>",
+						c: "<img width = 25px; height = 25px; src = 'http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/44_wa.jpg'>",
+						d: "<img width = 25px; height = 25px; src = 'http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/28_hu.jpg'>"
+					},
+					correctAnswer: 'd'
+				},
+				{
+					question: "Q9: What is the romaji of this symbol?  <br> <img width = 25px; height = 25px; src = 'http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/15_so.jpg'>",
+					answers: {
+						a: 'so',
+						b: 'to',
+						c: 'mu',
+						d: 'e'
+					},
+					correctAnswer: 'a'
+				},
+				{
+					question: "Q10: Which symbol corresponds to 'wa'?",
+					answers: {
+						a: "<img width = 25px; height = 25px; src = 'http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/11_sa.jpg'>",
+						b: "<img width = 25px; height = 25px; src = 'http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/31_ma.jpg'>",
+						c: "<img width = 25px; height = 25px; src = 'http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/26_ha.jpg'>",
+						d: "<img width = 25px; height = 25px; src = 'http://www.dartmouth.edu/~introjpn/text/hiragana/hiragana_files/44_wa.jpg'>"
+					},
+					correctAnswer: 'd'
+				}			
+			];
+		
+		}
+		
+		if(whichQuiz == 1) {
+			var quizContainer = document.getElementById('quiz');
+			var resultsContainer = document.getElementById('results');
+			//var submitButton = document.getElementById('submit');
+			if (! document.getElementById("submit")) {
+				var submitButton = document.createElement("BUTTON");
+				submitButton.className = "answerQuiz";
+				submitButton.id = "submit"
+				submitButton.innerHTML = "Submit scores!";
+				var pB = document.getElementById("placeB");
+				pB.appendChild(submitButton);
+			}
+		}
+		
+		else if (whichQuiz == 2) {
+			var quizContainer = document.getElementById('quiz1');
+			var resultsContainer = document.getElementById('results1');
+			//var submitButton = document.getElementById('submit');
+			if (! document.getElementById("submit1")) {
+				var submitButton = document.createElement("BUTTON");
+				submitButton.className = "answerQuiz";
+				submitButton.id = "submit1"
+				submitButton.innerHTML = "Submit scores!";
+				var pB = document.getElementById("placeB1");
+				pB.appendChild(submitButton);
+			}
+		}
+		
+		else if (whichQuiz == 3) {
+			var quizContainer = document.getElementById('quiz2');
+			var resultsContainer = document.getElementById('results2');
+			//var submitButton = document.getElementById('submit');
+			if (! document.getElementById("submit2")) {
+				var submitButton = document.createElement("BUTTON");
+				submitButton.className = "answerQuiz";
+				submitButton.id = "submit2"
+				submitButton.innerHTML = "Submit scores!";
+				var pB = document.getElementById("placeB2");
+				pB.appendChild(submitButton);
+			}
+		}
+		generateQuiz(myQuestions, quizContainer, resultsContainer, submitButton);
+	}	
+	
+	
+	
+	function generateQuiz(questions, quizContainer, resultsContainer, submitButton){
+		function showQuestions(questions, quizContainer){
+			var output = [];
+			var answers;
+
+			for(var i=0; i<questions.length; i++){
+				answers = [];
+				for(letter in questions[i].answers){
+
+					answers.push(
+						'<label>'
+							+ '<input type="radio" name="question'+i+'" value="'+letter+'">'
+							+ letter + ': '
+							+ questions[i].answers[letter]
+						+ '</label>'
+					);
+				}
+				output.push(
+					'<div class="question">' + questions[i].question + '</div>'
+					+ '<div class="answers">' + answers.join('') + '</div>'
+				);
+			}
+			quizContainer.innerHTML = output.join('');
+		}
+
+
+		function showResults(questions, quizContainer, resultsContainer){
+			var answerContainers = quizContainer.querySelectorAll('.answers');
+			var userAnswer = '';
+			var numCorrect = 0;
+			for(var i = 0; i < questions.length; i++){
+				userAnswer = (answerContainers[i].querySelector('input[name=question'+i+']:checked')||{}).value;
+				if(userAnswer===questions[i].correctAnswer){
+					numCorrect++;
+					answerContainers[i].style.color = 'green';
+				}
+				else{
+					answerContainers[i].style.color = 'red';
+				}
+			}
+			resultsContainer.innerHTML = numCorrect + ' out of ' + questions.length;
+			var storeScore = document.getElementById("getScore");
+			storeScore.innerHTML = numCorrect;
+			//numCorrect stores number of questions answered correctly... can store in database
+		}
+		showQuestions(questions, quizContainer);
+		submitButton.onclick = function(){
+			showResults(questions, quizContainer, resultsContainer);
+			//want to provide option to login / register now 
+			account();
+		}	
+	}
+	
+	function account() {
+		var loginOption = document.getElementById("login");
+		loginOption.style.display = "block";
+		//provide option to login/register and store quiz result 
+	}
+	
+	
+	function register(user,pass) {
+		//alert(user.value);
+		
+		//check is username already exists, if yes tell user to use different username!
+		xmlhttp = new XMLHttpRequest();
+		
+		// function will receive data sent from server
+		xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("displayUser").innerHTML = this.responseText;
+            }
+		};
+		
+		var score = document.getElementById("getScore");
+		//alert(parseInt(score.innerHTML));
+		
+		xmlhttp.open("GET", "register.php?q=" + user.value+ "&p= "+pass.value + "&r= "+score.innerHTML, true);
+		xmlhttp.send();
+	}
+	
+	function login(user,pass) {
+		//alert(user.value);
+		
+		//check is username already exists, if yes tell user to use different username!
+		xmlhttp = new XMLHttpRequest();
+		
+		// function will receive data sent from server
+		xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("displayUser").innerHTML = this.responseText;
+            }
+		};
+		
+		var score = document.getElementById("getScore");
+		//alert(score.innerHTML);
+		
+		xmlhttp.open("GET", "login.php?q=" + user.value+ "&p= "+pass.value + "&r= " +score.innerHTML, true);
+		xmlhttp.send();
+	}
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+
+</script>
+
+<style>
+ .answerQuiz {
+	background-color: green;
+	font-size: 14px;
+	border-radius: 15%;
+	color: white;
+	height: 40px;
+	width: 100px;
+ }
+ 
+ input[type=button], input[type=submit], input[type=reset] {
+	background-color: #4CAF50;
+	border: none;
+	color: white;
+	padding: 16px 32px;
+	text-decoration: none;
+	margin: 4px 2px;
+	cursor: pointer;
+	width: 18%;
+ }
+ 
+ 
+ input[type=text] {
+	width: 50%;
+	padding: 12px 20px;
+	margin: 8px 0;
+	box-sizing: border-box;
+ }
+ 
+ input[type=text]:focus {
+	background-color: lightblue;
+}
+
+ body {
+	background-color: white;
+	<!-- background-image: url("https://i.pinimg.com/originals/6c/7b/f6/6c7bf6aaca5c44a7dfb4019420571ebb.jpg"); -->
+ }
+ 
+ .imgSize {
+	width: 100px;
+	height: 100px;
+	box-shadow: 5px 10px #888888;
+	padding: 10px;
+	margin-right: 10px;
+	border: 5px solid black;
+ }
+ 
+ .label {
+	font-family: candara;
+	text-align: center;
+	font-style: italic;
+	font-weight: 900;
+	
+ }
+ 
+ td {
+	background-color: white;
+ }
+ 
+ .quiz {
+	text-align: center;
+ }
+ 
+
+ 
+ .tb {
+	margin: 0px auto;
+ }
+ 
+ .centreB {
+	text-align: center;
+ }
+ 
+ .buttonText {
+	border-radius: 8px;
+	color: black;
+	background-color: #ff7272;
+	border: 2px solid black;
+	font-size: 14px;
+	width: 400px;
+	height: 40px;
+ }
+ 
+ 
+ p {
+	border: 2px solid black;
+	background-color: #ffff91;
+	text-align: center;
+	color: black;
+	font-size: 14 px;
+	font-family: arial;
+ }
+ 
+  h1 {
+	border: 2px solid black;
+	background-color: #ffff91;
+	text-align: center;
+	font-size: 20px;
+	color: black;
+	font-family: arial;
+  }
+</style>
+</head>
+
+<body>
+<h1> Welcome to my Hiragana Tutor app!
+ Below you will find the full Hiragana set and three buttons which will quiz you on different sets of elements. 
+</h1>
+
+<div id = "login" style="display: none" class = "centreB">
+	Username: <br> <input type = "text" id = "user">  <br>
+	Password: <br> <input type = "text" id = "pass">  <br>
+	<input type = "submit" value = "Register" onclick = "register(user, pass)"> 
+	<input type = "submit" value = "Login" onclick = "login(user, pass)"> 
+</div>
+
+<div id = "displayUser">
+</div>
+
+<div> <br> </div>
+
+
+<div id = "getScore" style = "display: none">
+</div>
+
+
+<div class = "centreB">
+<button id = "button1" class = "buttonText" onclick = "startQuiz(1)">
+Be tested on these elements!
+<img src = "images\a.png" style = "width: 25px; height: 25px;"> (a) through to <img src = "images\ku.png" style = "width: 25px; height: 25px;"> (ku)
+</button>
+
+<div id = "placeB"> </div>
+<div id = "quiz"> </div>
+<div id = "results"> </div>
+<br><br>
+
+<button id = "button2" class = "buttonText" onclick = "startQuiz(2)">
+Be tested on these elements!
+<img src = "images\ma.png" style = "width: 25px; height: 25px;"> (ma) through to <img src = "images\ru.png" style = "width: 25px; height: 25px;"> (ru)
+</button>
+
+<div id = "placeB1"> </div>
+<div id = "quiz1"> </div>
+<div id = "results1"> </div> 
+
+
+<br><br>
+
+<button id = "button3" class = "buttonText" onclick = "startQuiz(3)">
+Be tested on these elements!
+<img src = "images\sa.png" style = "width: 25px; height: 25px;"> (sa) through to <img src = "images\n.png" style = "width: 25px; height: 25px;"> (n)
+</button>
+
+<div id = "placeB2"> </div>
+<div id = "quiz2"> </div>
+<div id = "results2"> </div> 
+
+</div>
+
+<br>
+<p> Press the button to hide the symbols. The quizes are based off an honour system (hide the symbols before attempting the quiz)! </p>
+<div style="text-align: center"> <button id = "setClick" class = "buttonText" onclick = "hideTable()"> Hide table! </button> </div>
+
+<table id = "hidden" class = "tb">
+	<tr>
+		<td> <img  onmouseout="defaultImage(this,id)" onmouseover="showDrawing(this, id)" onclick="playAudio(id)"  class = "imgSize" id = "a" src = "images\a.png" > </td> 
+		<td> <img  onmouseout="defaultImage(this,id)" onmouseover="showDrawing(this, id)" onclick="playAudio(id)"  class = "imgSize" id = "e" src = "images\e.png" > </td> 
+		<td> <img  onmouseout="defaultImage(this,id)" onmouseover="showDrawing(this, id)" onclick="playAudio(id)"  class = "imgSize" id = "i" src = "images\i.png" > </td> 
+		<td> <img  onmouseout="defaultImage(this,id)" onmouseover="showDrawing(this, id)" onclick="playAudio(id)"  class = "imgSize" id = "o" src = "images\o.png" > </td> 
+		<td> <img  onmouseout="defaultImage(this,id)" onmouseover="showDrawing(this, id)" onclick="playAudio(id)"  class = "imgSize" id = "u" src = "images\u.png" > </td> 
+	</tr>
+	<tr> <td class = "label"> a </td>  <td class = "label"> e </td>  <td class = "label"> i </td> <td class = "label"> o </td> <td class = "label"> u </td> </tr>
+	<tr>
+		<td> <img  onmouseout="defaultImage(this,id)" onmouseover="showDrawing(this, id)" onclick="playAudio(id)"  class = "imgSize" id = "ha" src = "images\ha.png" > </td> 
+		<td> <img  onmouseout="defaultImage(this,id)" onmouseover="showDrawing(this, id)" onclick="playAudio(id)"  class = "imgSize" id = "he" src = "images\he.png" > </td> 
+		<td> <img  onmouseout="defaultImage(this,id)" onmouseover="showDrawing(this, id)" onclick="playAudio(id)"  class = "imgSize" id = "hi" src = "images\hi.png" > </td> 
+		<td> <img  onmouseout="defaultImage(this,id)" onmouseover="showDrawing(this, id)" onclick="playAudio(id)"  class = "imgSize" id = "ho" src = "images\ho.png" > </td> 
+		<td> <img  onmouseout="defaultImage(this,id)" onmouseover="showDrawing(this, id)" onclick="playAudio(id)"  class = "imgSize" id = "hu" src = "images\hu.png" > </td> 
+	</tr>
+	<tr> <td class = "label"> ha </td>  <td class = "label"> he </td>  <td class = "label"> hi </td> <td class = "label"> ho </td> <td class = "label"> hu </td> </tr>
+	<tr>
+		<td> <img  onmouseout="defaultImage(this,id)" onmouseover="showDrawing(this, id)" onclick="playAudio(id)"  class = "imgSize" id = "ka" src = "images\ka.png" > </td> 
+		<td> <img  onmouseout="defaultImage(this,id)" onmouseover="showDrawing(this, id)" onclick="playAudio(id)"  class = "imgSize" id = "ke" src = "images\ke.png" > </td> 
+		<td> <img  onmouseout="defaultImage(this,id)" onmouseover="showDrawing(this, id)" onclick="playAudio(id)"  class = "imgSize" id = "ki" src = "images\ki.png" > </td> 
+		<td> <img  onmouseout="defaultImage(this,id)" onmouseover="showDrawing(this, id)" onclick="playAudio(id)"  class = "imgSize" id = "ko" src = "images\ko.png" > </td> 
+		<td> <img  onmouseout="defaultImage(this,id)" onmouseover="showDrawing(this, id)" onclick="playAudio(id)"  class = "imgSize" id = "ku" src = "images\ku.png" > </td> 
+	</tr>
+	<tr> <td class = "label"> ka </td>  <td class = "label"> ke </td>  <td class = "label"> ki </td> <td class = "label"> ko </td> <td class = "label"> ku </td> </tr>
+	<tr>
+		<td> <img  onmouseout="defaultImage(this,id)" onmouseover="showDrawing(this, id)" onclick="playAudio(id)"  class = "imgSize" id = "ma" src = "images\ma.png" > </td> 
+		<td> <img  onmouseout="defaultImage(this,id)" onmouseover="showDrawing(this, id)" onclick="playAudio(id)"  class = "imgSize" id = "me" src = "images\me.png" > </td> 
+		<td> <img  onmouseout="defaultImage(this,id)" onmouseover="showDrawing(this, id)" onclick="playAudio(id)"  class = "imgSize" id = "mi" src = "images\mi.png" > </td> 
+		<td> <img  onmouseout="defaultImage(this,id)" onmouseover="showDrawing(this, id)" onclick="playAudio(id)"  class = "imgSize" id = "mo" src = "images\mo.png" > </td> 
+		<td> <img  onmouseout="defaultImage(this,id)" onmouseover="showDrawing(this, id)" onclick="playAudio(id)"  class = "imgSize" id = "mu" src = "images\mu.png" > </td> 
+	</tr>
+	<tr> <td class = "label"> ma </td>  <td class = "label"> me </td>  <td class = "label"> mi </td> <td class = "label"> mo </td> <td class = "label"> mu </td> </tr>
+	<tr>
+		<td> <img  onmouseout="defaultImage(this,id)" onmouseover="showDrawing(this, id)" onclick="playAudio(id)"  class = "imgSize" id = "na" src = "images\na.png" > </td> 
+		<td> <img  onmouseout="defaultImage(this,id)" onmouseover="showDrawing(this, id)" onclick="playAudio(id)"  class = "imgSize" id = "ne" src = "images\ne.png" > </td> 
+		<td> <img  onmouseout="defaultImage(this,id)" onmouseover="showDrawing(this, id)" onclick="playAudio(id)"  class = "imgSize" id = "ni" src = "images\ni.png" > </td> 
+		<td> <img  onmouseout="defaultImage(this,id)" onmouseover="showDrawing(this, id)" onclick="playAudio(id)"  class = "imgSize" id = "no" src = "images\no.png" > </td> 
+		<td> <img  onmouseout="defaultImage(this,id)" onmouseover="showDrawing(this, id)" onclick="playAudio(id)"  class = "imgSize" id = "nu" src = "images\nu.png" > </td> 
+	</tr>
+	<tr> <td class = "label"> na </td>  <td class = "label"> ne </td>  <td class = "label"> ni </td> <td class = "label"> no </td> <td class = "label"> nu </td> </tr>
+	<tr>
+		<td> <img  onmouseout="defaultImage(this,id)" onmouseover="showDrawing(this, id)" onclick="playAudio(id)"  class = "imgSize" id = "ra" src = "images\ra.png" > </td> 
+		<td> <img  onmouseout="defaultImage(this,id)" onmouseover="showDrawing(this, id)" onclick="playAudio(id)"  class = "imgSize" id = "re" src = "images\re.png" > </td> 
+		<td> <img  onmouseout="defaultImage(this,id)" onmouseover="showDrawing(this, id)" onclick="playAudio(id)"  class = "imgSize" id = "ri" src = "images\ri.png" > </td> 
+		<td> <img  onmouseout="defaultImage(this,id)" onmouseover="showDrawing(this, id)" onclick="playAudio(id)"  class = "imgSize" id = "ro" src = "images\ro.png" > </td> 
+		<td> <img  onmouseout="defaultImage(this,id)" onmouseover="showDrawing(this, id)" onclick="playAudio(id)"  class = "imgSize" id = "ru" src = "images\ru.png" > </td> 
+	</tr>
+	<tr> <td class = "label"> ra </td>  <td class = "label"> re </td>  <td class = "label"> ri </td> <td class = "label"> ro </td> <td class = "label"> ru </td> </tr>
+	<tr>
+		<td> <img  onmouseout="defaultImage(this,id)" onmouseover="showDrawing(this, id)" onclick="playAudio(id)"  class = "imgSize" id = "sa" src = "images\sa.png" > </td> 
+		<td> <img  onmouseout="defaultImage(this,id)" onmouseover="showDrawing(this, id)" onclick="playAudio(id)"  class = "imgSize" id = "se" src = "images\se.png" > </td> 
+		<td> <img  onmouseout="defaultImage(this,id)" onmouseover="showDrawing(this, id)" onclick="playAudio(id)"  class = "imgSize" id = "si" src = "images\si.png" > </td> 
+		<td> <img  onmouseout="defaultImage(this,id)" onmouseover="showDrawing(this, id)" onclick="playAudio(id)"  class = "imgSize" id = "so" src = "images\so.png" > </td> 
+		<td> <img  onmouseout="defaultImage(this,id)" onmouseover="showDrawing(this, id)" onclick="playAudio(id)"  class = "imgSize" id = "su" src = "images\su.png" > </td>
+	</tr>
+	<tr> <td class = "label"> sa </td>  <td class = "label"> se </td>  <td class = "label"> si </td> <td class = "label"> so </td> <td class = "label"> su </td> </tr>
+	<tr>
+		<td> <img  onmouseout="defaultImage(this,id)" onmouseover="showDrawing(this, id)" onclick="playAudio(id)"  class = "imgSize" id = "ta" src = "images\ta.png" > </td> 
+		<td> <img  onmouseout="defaultImage(this,id)" onmouseover="showDrawing(this, id)" onclick="playAudio(id)"  class = "imgSize" id = "te" src = "images\te.png" > </td> 
+		<td> <img  onmouseout="defaultImage(this,id)" onmouseover="showDrawing(this, id)" onclick="playAudio(id)"  class = "imgSize" id = "ti" src = "images\ti.png" > </td> 
+		<td> <img  onmouseout="defaultImage(this,id)" onmouseover="showDrawing(this, id)" onclick="playAudio(id)"  class = "imgSize" id = "to" src = "images\to.png" > </td> 
+		<td> <img  onmouseout="defaultImage(this,id)" onmouseover="showDrawing(this, id)" onclick="playAudio(id)"  class = "imgSize" id = "tu" src = "images\tu.png" > </td> 
+	</tr>
+	<tr> <td class = "label"> ta </td>  <td class = "label"> te </td>  <td class = "label"> ti </td> <td class = "label"> to </td> <td class = "label"> tu </td> </tr>
+	<tr>
+		<td> <img  onmouseout="defaultImage(this,id)" onmouseover="showDrawing(this, id)" onclick="playAudio(id)"  class = "imgSize" id = "wa" src = "images\wa.png" > </td> 
+		<td> <img  onmouseout="defaultImage(this,id)" onmouseover="showDrawing(this, id)" onclick="playAudio(id)"  class = "imgSize" id = "wo" src = "images\wo.png" > </td> 
+	</tr>
+	<tr> <td class = "label"> wa </td>  <td class = "label"> wo </td> </tr>
+	<tr>
+		<td> <img  onmouseout="defaultImage(this,id)" onmouseover="showDrawing(this, id)" onclick="playAudio(id)"  class = "imgSize" id = "ya" src = "images\ya.png" > </td> 
+		<td> <img  onmouseout="defaultImage(this,id)" onmouseover="showDrawing(this, id)" onclick="playAudio(id)"  class = "imgSize" id = "yo" src = "images\yo.png" > </td> 
+		<td> <img  onmouseout="defaultImage(this,id)" onmouseover="showDrawing(this, id)" onclick="playAudio(id)"  class = "imgSize" id = "yu" src = "images\yu.png" > </td> 
+	</tr>
+	<tr> <td class = "label"> ya </td>  <td class = "label"> yo </td>  <td class = "label"> yu </td>  </tr>
+	<tr>
+		<td> <img  onmouseout="defaultImage(this,id)" onmouseover="showDrawing(this, id)" onclick="playAudio(id)"  class = "imgSize" id = "n" src = "images\n.png" > </td> 
+	</tr>
+	<tr> <td class = "label"> n </td>  </tr> <br>
+	</table>
+	
+	<p> References to resources used: <br>
+	<a href="http://www.guidetojapanese.org/learn/complete/hiragana">Audio from here!</a> <br>
+	<a href="https://commons.wikimedia.org/wiki/Category:Hiragana_stroke_order_(animated_image_set)">Images and gifs from here!</a><br>
+	<a href="http://www.dartmouth.edu/~introjpn/text/hiragana.html">Image addresses from here!</a>
+	</p>
+	
+</body>
+</html>
