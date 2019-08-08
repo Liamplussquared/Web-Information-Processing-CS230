@@ -1,0 +1,3 @@
+Task was to create a HTML/CSS/JS application that presented student grades in a specified manner. A styled button was to be created which calculated each student's final grade upon click. 
+Additional tasks were to create functionality via JavaScript such that all final grade averages automatically updated whenever a change was made to any student's grade. It was also asked of me to 
+tell users how many unsubmitted assignments existed. Finally, each cell where student scores could be entered were to be validated using JavaScript.
