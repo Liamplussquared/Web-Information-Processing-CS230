@@ -1,0 +1,2 @@
+Task was to create a SPA (single page application) which functioned as a Hiragana Tutor app. The full Hiragana set was to be displayed on the webpage with further requirements as to actions when each image hovered over / clicked on.
+It was also necessary to allow users to select a training set of elements, which they would then be quizzed upon. An option to allow users to save performance in quizzes was to be implemented by allowing users to authenticate. AJAX was used for communication between web service reponsible for management of learners' database.
